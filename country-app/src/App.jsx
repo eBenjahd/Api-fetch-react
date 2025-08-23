@@ -1,11 +1,21 @@
 import DisplayCountries from "./components/displayCountries/DisplayCountries"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import Layout from "./components/layout/Layout"
+import CountryDetail from "./components/countryDetail/CountryDetail"
 
 function App() {
 
   return (
-    <div>
-      <DisplayCountries />
-    </div>
+
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route path="/" element={<DisplayCountries />} />
+          <Route path="/country/:cca3" element={<CountryDetail />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+    
   )
 }
 

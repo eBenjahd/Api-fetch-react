@@ -1,13 +1,14 @@
 import useFetchData from "../fetch/FetchData"
 import SearchCountry from "../search/SearchCountry"
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 
 // styles 
 import './DisplayCountries.scss'
 
 function DisplayCountries() {
 
-    const URL = 'https://restcountries.com/v3.1/independent?status=true'
+    const URL = import.meta.env.VITE_COUNTRIES_API // URL 
     const {data, loading, error} = useFetchData(URL)
     const [query, setQuery] = useState('')
     const [debounceQuery, setDebounceQuery] = useState('')
@@ -42,9 +43,11 @@ function DisplayCountries() {
                 filteredCountries.slice(0, quantity).map((country) => (
                 <div className="grid" key={country.cca3}>
                     <img width="50px" src={country.flags.svg} alt={country.name.common} />
-                    <h2>
-                    {country.name.common} <span>{country.flag}</span>
-                    </h2>
+                    <Link to={`/country/${country.cca3}`}>
+                        <h2>
+                        {country.name.common} <span>{country.flag}</span>
+                        </h2>
+                    </Link>
                     <p>Continent: {country.region}</p>
                     <p>Capital: {country.capital}</p>
                     <p>Population: {country.population}</p>
@@ -57,7 +60,7 @@ function DisplayCountries() {
 
         <div className="buttons">
             {filteredCountries.length > 0 && (
-                <button onClick={showCountries} disabled={quantity >= filteredCountries.length}>View more</button>
+                <button onClick={showCountries} disabled={quantity >= filteredCountries.length}>Load more</button>
             )}
             {filteredCountries.length > 0 && (
                 <button onClick={showLess} disabled={quantity <= 10}>View less</button>
