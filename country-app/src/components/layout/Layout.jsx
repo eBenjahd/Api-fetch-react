@@ -14,7 +14,7 @@ function Layout() {
         </main>
 
         <footer>
-            <p>© - copyright 2025</p>
+            <p>© 2025 World Countries App</p>
         </footer>
     </>
   )

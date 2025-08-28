@@ -1,10 +1,13 @@
+import './SearchCountry.scss';
+
 function SearchCountry({query, setQuery, loading}) {
   return (
-    <div>
+    <div className='search-container'>
         <label htmlFor="country">Search for a country:</label>
         <input 
+            id="country"
             type="search" 
-            placeholder="Search for a country" 
+            placeholder="Search for a country..." 
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             autoComplete="off"

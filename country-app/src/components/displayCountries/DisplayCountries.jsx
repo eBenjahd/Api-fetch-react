@@ -41,16 +41,24 @@ function DisplayCountries() {
         <div className="data">
             {filteredCountries.length > 0 ? (
                 filteredCountries.slice(0, quantity).map((country) => (
-                <div className="grid" key={country.cca3}>
-                    <img width="50px" src={country.flags.svg} alt={country.name.common} />
-                    <Link to={`/country/${country.cca3}`}>
+                <div className={`country-card`}key={country.cca3}>
+                    <figure>
+                        <img src={country.flags.svg} alt={country.name.common} />
+                    </figure>
+                    <div className="info-card">
                         <h2>
-                        {country.name.common} <span>{country.flag}</span>
+                            {country.name.common}
                         </h2>
-                    </Link>
-                    <p>Continent: {country.region}</p>
-                    <p>Capital: {country.capital}</p>
-                    <p>Population: {country.population}</p>
+
+                        <div className="data-container">
+                            <p><span>Continent:</span> {country.region}</p>
+                            <p><span>Capital: </span> {country.capital}</p>
+                            <p><span>Population: </span> {country.population.toLocaleString("en-US")}</p>
+                        </div>
+                        <Link to={`/country/${country.cca3}`}>   
+                                View Detail <span>{country.flag}</span>
+                        </Link>
+                    </div>
                 </div>
                 ))
             ) : (
